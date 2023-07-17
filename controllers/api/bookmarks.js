@@ -30,13 +30,19 @@ const createBookmark = async (req, res, next) => {
     try {
         const createdBookmark = await Bookmark.create(req.body)
         res.locals.data.bookmark = createdBookmark 
+        next()
     } catch (error) {
         res.status(400).json({ msg: error.message})
     }
 }
 
+const respondWithBookmarks = (req,res) => {
+    res.json(res.locals.data.bookmarks)
+}
+
 module.exports = {
     destroyBookmark,
     updateBookmark,
-    createBookmark
+    createBookmark,
+    respondWithBookmarks
 }

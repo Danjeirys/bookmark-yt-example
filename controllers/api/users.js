@@ -23,18 +23,51 @@ const login = async (req, res, next) => {
         if(!user) throw new Error('user not found, email was invalid')
         const password = crypto.createHmac('sha256', process.env.SECRET).update(req.body.password).split('').reverse().join('')
         const match = await bcrypt.compare(password, user.password)
-
+        if(!match) throw new Error('Password did not match')
+        res.locals.data.user = user 
+        res.locals.data.token = createJWT(user)
+        next()
     } catch (error) {
-
+        res.status(400).json({ msg: error.message })
     }
+}
+
+const getBookmarkByUser = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email }).populate('bookmarks').sort('bookmarks.createdAt').exec()
+        const bookmarks = user.bookmarks
+        res.locals.data.bookmarks = bookmarks
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message})
+    }
+}
+
+const respondWithToken = (req, res) => {
+    res.json(res.locals.data.token)
+}
+
+const respondWithUser = (req, res) => {
+    res.json(res.locals.data.user)
+}
+
+const respondWithBookmarks = (req,res) => {
+    res.json(res.locals.data.bookmarks)
+}
+
+
+module.exports = {
+    signUp,
+    login,
+    getBookmarkByUser,
+    respondWithToken,
+    respondWithBookmarks,
+    respondWithUser
 }
 
 
 
-
-
-
-
+// Helper function
 function createJWT(user){
     return jwt.sign({ user }, process.env.SECRET, { expiresIn: '48h' })
 }
