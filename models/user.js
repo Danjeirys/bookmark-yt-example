@@ -5,9 +5,9 @@ const crypto = require('crypto')
 const SALT_ROUNDS = 6 
 
 const userSchema = new Schema ({
-    name: { type: string, required: true },
-    email: { type: string, unique: true, trim: true, lowercase: true, required: true },
-    password: { type: string, trim: true, minlength: 5, required: true },
+    name: { type: String, required: true },
+    email: { type: String, unique: true, trim: true, lowercase: true, required: true },
+    password: { type: String, trim: true, minlength: 5, required: true },
     bookmarks: [{ type: Schema.Types.ObjectId, ref: 'Bookmark'}]
 }, {
     timestamps: true, 
@@ -21,7 +21,7 @@ const userSchema = new Schema ({
 
 userSchema.pre('save', async function (next) {
     if(!this.isModified('password')) return next()
-    const password = crypto.createHmac('sha256', process.env.SECRET).update(this.password).split('').reverse().join('')          //sha256 very good hashing algo
+    const password = crypto.createHmac('sha256', process.env.SECRET).update(this.password).digest('hex').split('').reverse().join('')          //sha256 very good hashing algo
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS)
 })
 

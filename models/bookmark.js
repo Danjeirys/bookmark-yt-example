@@ -1,8 +1,8 @@
-const { Schema, model } = requie('mongoose')
+const { Schema, model } = require('mongoose')
 
 const bookmarkSchema = new Schema({
-    title: { type: string, required: true },
-    url: { type: String, required: tru }, 
+    title: { type: String, required: true },
+    url: { type: String, required: true } 
 }, {
     timestamps: true
 })

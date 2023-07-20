@@ -40,13 +40,13 @@ const createBookmark = async (req, res, next) => {
     }
 }
 
-const respondWithBookmarks = (req,res) => {
-    res.json(res.locals.data.bookmarks)
+const respondWithBookmark = (req,res) => {
+    res.json(res.locals.data.bookmark)
 }
 
 module.exports = {
     destroyBookmark,
     updateBookmark,
     createBookmark,
-    respondWithBookmarks
+    respondWithBookmark
 }

@@ -6,10 +6,12 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn')
 
 
 // Delete/destroy bookmark ---- api/bookmarks/:d
-router.delete('/:id', checkToken, ensureLoggedIn, bookmarkCtrl.destroyBookmark, bookmarkCtrl.respondWithBookmarks)
+router.delete('/:id', checkToken, ensureLoggedIn, bookmarkCtrl.destroyBookmark, bookmarkCtrl.respondWithBookmark)
 
 // Put/Update bookmark ----- api/bookmarks/:id
-router.put('/:id', checkToken, ensureLoggedIn, bookmarkCtrl.updateBookmark, bookmarkCtrl.respondWithBookmarks)
+router.put('/:id', checkToken, ensureLoggedIn, bookmarkCtrl.updateBookmark, bookmarkCtrl.respondWithBookmark)
 
 // Post/create bookmark ------ api/bookmarks/:id
-router.post('/', checkToken, ensureLoggedIn, bookmarkCtrl.createBookmark, bookmarkCtrl.respondWithBookmarks)
+router.post('/', checkToken, ensureLoggedIn, bookmarkCtrl.createBookmark, bookmarkCtrl.respondWithBookmark)
+
+module.exports = router
