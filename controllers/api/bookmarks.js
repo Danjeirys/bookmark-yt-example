@@ -36,7 +36,7 @@ const createBookmark = async (req, res, next) => {
         res.locals.data.bookmark = createdBookmark 
         next()
     } catch (error) {
-        res.status(400).json({ msg: error.message})
+        res.status(400).json({ msg: error.message })
     }
 }
 
