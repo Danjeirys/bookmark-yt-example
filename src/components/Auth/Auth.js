@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import Login from '../Login/Login'
 import SignUp from '../SignUp/SignUp'
+import styles from './Auth.module.scss'
 
 export default function Auth({
     login,
     SignUp,
     credentials,
-    handleChangeAuth
+    handleChangeAuth,
+    token,
+    setToken
 }) {
     const [showSignUp, setShowSignUp] = useState(true)
     const [user, setUser] = useState(null)
@@ -22,17 +25,19 @@ export default function Auth({
             }
             return token
         }
-        const token = getToken()
-        const data = token ? JSON.parse(window.atob(token.split('.')[0])).user : null 
+        const myToken = getToken()
+        const data = myToken ? JSON.parse(window.atob(myToken.split('.')[0])).user : null 
         setUser(data)
+        setToken(myToken)
     }, [])
     return(
         <>
         {
             user && user.name ?
-            <h1>Welcome {user.name.toUpperCase()}</h1> :
+            <h1 className={styles.h1}>Welcome {user.name.toUpperCase()}</h1> :
             <>
                 <button 
+                    className={styles.button}
                     onClick={() => {
                         setShowSignUp(!showSignUp)
                     }}

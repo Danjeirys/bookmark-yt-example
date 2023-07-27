@@ -1,0 +1,19 @@
+:root{
+    --offwhite: #fdfcf1;
+    --text-light: #968c84;
+    --text-dark: #615954;
+    --text-black: #161616;
+}
+
+
+body {
+    margin: 0;
+    padding: 1vw;
+    height: 100vw;
+    background-color: var(#fdfcf1);
+    color: var(--text-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

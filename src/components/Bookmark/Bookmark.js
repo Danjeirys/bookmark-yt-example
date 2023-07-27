@@ -1,16 +1,17 @@
 import { useRef, useState } from 'react' 
+import styles from './Bookmark.module.scss'
 
 export default function Bookmark ({
     bookmark,
     updateBookamrk,
     deleteBookmark
 }) {
-    const [showInput, setShotInput] = useState(false)
+    const [showInput, setShowInput] = useState(false)
     const inputRef = useRef(null)
     return (
         <>
             <li>
-                <h4 onClick={() => setShotInput(!showInput)}>{bookmark.title}</h4>
+                <h4 onClick={() => setShowInput(!showInput)}>{bookmark.title}</h4>
                 <input 
                     ref={inputRef}
                     style={{ display: showInput ? 'block': 'none' }}

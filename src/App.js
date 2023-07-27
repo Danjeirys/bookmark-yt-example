@@ -43,6 +43,8 @@ export default function App() {
       localStorage.setItem("token", JSON.stringify(tokenResponse));
     } catch (error) {
       console.error(error);
+    } finally {
+      window.location.reload()
     }
   };
   const signUp = async () => {
@@ -59,6 +61,8 @@ export default function App() {
       localStorage.setItem("token", JSON.stringify(tokenResponse));
     } catch (error) {
       console.error(error);
+    } finally {
+      window.location.reload()
     }
   };
   const createBookmark = async () => {
@@ -140,7 +144,7 @@ export default function App() {
     if (tokenData && tokenData !== "null" && tokenData !== "undefined") {
       listBookmarksByUser();
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     const tokenData = localStorage.getItem("token");
@@ -150,11 +154,24 @@ export default function App() {
   }, []);
   return (
     <>
+    {
+      token?
+        <button onClick={() => {
+          local.storage.removeItem('token')
+          window.location.reload()
+        }}>
+          Logout
+        </button>:
+        ''
+    }
+    
       <Auth 
         login={login}
         credentials={credentials}
         handleChangeAuth={handleChangeAuth}
         signUp={signUp}
+        setToken={setToken}
+        token={token}
       />
       <CreateBookmark
         createBookmark={createBookmark}
