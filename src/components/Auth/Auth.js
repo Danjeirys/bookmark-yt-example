@@ -5,7 +5,7 @@ import styles from './Auth.module.scss'
 
 export default function Auth({
     login,
-    SignUp,
+    signUp,
     credentials,
     handleChangeAuth,
     token,
@@ -47,7 +47,7 @@ export default function Auth({
                 {
                     showSignUp?
                     <SignUp
-                        SignUp={SignUp}
+                        signUp={signUp}
                         credentials={credentials}
                         handleChangeAuth={handleChangeAuth}
                     /> :

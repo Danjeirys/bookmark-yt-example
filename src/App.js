@@ -157,7 +157,7 @@ export default function App() {
     {
       token?
         <button onClick={() => {
-          local.storage.removeItem('token')
+          localStorage.removeItem('token')
           window.location.reload()
         }}>
           Logout
