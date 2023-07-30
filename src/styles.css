@@ -10,10 +10,14 @@ body {
     margin: 0;
     padding: 1vw;
     height: 100vw;
-    background-color: var(#fdfcf1);
+    /* background-color: var(#fdfcf1); */
+    background-image: url('https://i.pinimg.com/1200x/8c/74/bb/8c74bb4e959d7211e27c10b5980cb970.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     color: var(--text-black);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
